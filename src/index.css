@@ -1,68 +1,209 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  padding: 0px;
+  margin: 0px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+#root{
+  width: 100%;
+  height: 100vh;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 42px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.scoreIndicator{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.correctScoreIndicator-container,.wrongScoreIndicator-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 20px;
+}
+
+.outerCircle{
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.innerCircle{
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-size: 38px;
+}
+
+.correctScoreIndicator-outerCircle{
+  border-color: #47B503;
+}
+
+.correctScoreIndicator-innerCircle{
+  background-color: #47B503;
+  color: #F4F4F4;
+}
+
+.wrongScoreIndicator-outerCircle{
+  border-color: #D21900;
+}
+
+.wrongScoreIndicator-innerCircle{
+  background-color: #D21900;
+  color: #F4F4F4;
+}
+
+.roboto-semiBold {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.roboto-regular {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.roboto-medium {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.mysteryBox,.correctGuessBox,.wrongGuessBox{
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+}
+
+
+.correctGuessBox{
+  background-color: #146152;
+}
+
+.wrongGuessBox{
+  background-color: #8C1F28;
+}
+
+.mysteryText{
+  width: 560px;
+  text-wrap: wrap;
+  text-align: center;
+}
+
+.guessButtonsContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 24px;
+}
+
+.guessButtonsContainer .buttons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.button{
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.newButton{
+  background-color: #ACC8E5;
+  color: #012030;
+  font-size: 18px;
+  height: 56px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    gap: 24px;
   }
-  a:hover {
-    color: #747bff;
+
+  .scoreIndicator {
+    gap: 8px;
   }
-  button {
-    background-color: #f9f9f9;
+
+.innerCircle{
+  width: 42px;
+  height: 42px;
+  font-size: 24px;
+}
+
+.outerCircle{
+  width: 52px;
+  height: 52px;
+}
+
+  .guessButtonsContainer .buttons {
+    gap: 8px;
+  }
+
+  .button {
+    max-width: 100%;
+  }
+  .wrongGuessBox,.mysteryBox,.correctGuessBox{
+    font-size: 32px;
+    height: 120px;
+  }
+
+  .mysteryText{
+    width: 300px;
   }
 }

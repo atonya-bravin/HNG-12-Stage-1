@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { motion, AnimatePresence } from "framer-motion";
+import { useScoreContext } from "./Context/Score.tsx";
+import GuessButtonsContainer from "./Components/GuessButtonsContainer";
+import MysteryBox from "./Components/MysteryBox";
+import CorrectGuessBox from "./Components/CorrectGuessBox";
+import WrongGuessBox from "./Components/WrongGuessBox";
+import ScoreIndicator from "./Components/ScoreIndicator";
+import NewGame from "./Components/NewGame";
+import "./index.css";
+import colors from "./Data/colors.json";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
+  const { correctGuesses, guessStatus, incorrectGuesses } = useScoreContext();
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container">
+      <ScoreIndicator correctScore={correctGuesses} incorrectScore={incorrectGuesses} />
+      
+      <AnimatePresence mode="wait">
+        {guessStatus === "correct" && (
+          <motion.div
+            key="correct"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="guess-box correct"
+          >
+            <CorrectGuessBox />
+          </motion.div>
+        )}
 
-export default App
+        {guessStatus === "wrong" && (
+          <motion.div
+            key="wrong"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="guess-box wrong"
+          >
+            <WrongGuessBox />
+          </motion.div>
+        )}
+
+        {guessStatus === "stale" && (
+          <motion.div
+            key="mystery"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="guess-box"
+          >
+            <MysteryBox />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <GuessButtonsContainer colors={colors[0]} />
+      <NewGame />
+    </div>
+  );
+};
+
+export default App;
